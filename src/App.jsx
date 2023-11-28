@@ -1,11 +1,13 @@
 import { BrowserRouter } from "react-router-dom";
-
+import { axiosInstance } from "./config";
 import {
   Discover,
   Home,
   Navbar,
 
 } from "./components";
+
+
 const App = () => {
   return (
     <BrowserRouter>
