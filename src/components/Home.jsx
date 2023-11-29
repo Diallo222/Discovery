@@ -17,7 +17,7 @@ const Home = () => {
           <h1 className={`${styles.heroHeadText} text-white-100 md:w-[500px]`}>
            Discover and explore beautifull images
           </h1>
-          <p className={`${styles.heroSubText} mt-2 text-black-100`}>
+          <p className={`${styles.heroSubText} mt-2 text-gray-300`}>
             All images are taken by <br className="sm:block hidden" />
             professional photographer
           </p>

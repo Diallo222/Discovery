@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-
+import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
 import { motion } from "framer-motion";
 import {useDispatch, useSelector, shallowEqual} from 'react-redux';
-import { getLocations } from "../redux/location/locationSlice";
+import { getImages , getMore } from "../redux/location/locationSlice";
 import { Tilt } from "react-tilt";
 import { styles } from "../styles";
 import { SectionWrapper } from "../hoc";
 import { fadeIn, textVariant } from "../utils/motion";
-import { area, herobg, logo } from "../assets";
+
 
 const AreaCard = ({
 	index,
@@ -17,41 +17,49 @@ const AreaCard = ({
 	photographer,
 	demo_link,
 }) => {
-	return (
-		<div
-			// variants={fadeIn("up", "spring", index * 0.5, 0.75)}
-			className="p-2 rounded-lg sm:w-[280px] w-[80%] bg-white"
-		>
-			
-				<div className="relative ">
-        <Tilt
-				options={{
-					max: 40,
-					scale: 1,
-					speed: 450,
-				}}
-			>
-					<img
+	return (	
+    <div 
+   className=" w-full rounded-lg "
+    >	
+  <img
 						src={image}
 						alt={name}
-						className="w-[full] h-[full] md:h-[200px]  object-cover rounded-md"
+						style={{ width: "100%", borderRadius: "8px" }}
 					/>
-        </Tilt>
-				</div>
+		 			<p className="left-2 text-white text-[14px] leading-snug text-center">
+					From {photographer}
+		 			</p>
+      </div>		
+		// <div
+		// 	// variants={fadeIn("up", "spring", index * 0.5, 0.75)}
+		// 	className="p-2 rounded-lg sm:w-[280px] w-[80%] bg-white"
+		// >
+			
+		// 		<div className="relative ">
+    //     <Tilt
+		// 		options={{
+		// 			max: 40,
+		// 			scale: 1,
+		// 			speed: 450,
+		// 		}}
+		// 	>
 
-				<div className="mt-3">
-					<p className="mt-2 text-black text-[14px] leading-snug text-center">
-						{description}
-					</p>
-				</div>
-				<div className="mt-2 flex flex-wrap gap-1"></div>
-        <div className="mt-3">
-					<p className="mt-2 text-black text-[14px] leading-snug text-center">
-						{photographer}
-					</p>
-				</div>
+    //     {/* </Tilt>
+		// 		</div>
+
+		// 		<div className="mt-3">
+		// 			<p className="mt-2 text-black text-[14px] leading-snug text-center">
+		// 				{description}
+		// 			</p>
+		// 		</div>
+		// 		<div className="mt-2 flex flex-wrap gap-1"></div>
+    //     <div className="mt-3">
+		// 			<p className="mt-2 text-black text-[14px] leading-snug text-center">
+		// 				{photographer}
+		// 			</p>
+		// 		</div>
 		
-		</div>
+		// </div> */}
 	);
 };
 
@@ -60,32 +68,44 @@ const SearchZone = ({value , handleClick, onclick})=> {
 <div className="flex flex-row w-full h-30 justify-start gap-10 items-center py-2" >
          <input 
          className="placeholder-shown:border-gray-500 p-2 rounded-lg "
-          placeholder="you@example.com"
+          placeholder="mountain , car"
           value={value}
           onChange={handleClick}
           />
+     {
+      value &&
       <div className="flex justify-center items-center cursor-pointer" 
       onClick={onclick}
       >
 					<a className="shadow-md shadow-gray-700 p-2 bg-zinc-800 rounded-lg flex justify-center text-sm"
-						// href={demo_link}
-						// target="_blank"
 					>
 					search
 					</a>
 				</div>
+     } 
       </div>
   )
 }
 const Discover = () => {
-  const {locations, loading, error} = useSelector(
+  const {images, next_page , loading, error } = useSelector(
     state => state.location,
     shallowEqual,
   );
   const [query , setQuery] = useState("")
  const dispatch = useDispatch()
 
-//  console.log("Result", locations.photos);
+  const items = images && images.map((item , index)=>(
+    <AreaCard
+      key={index}
+      index={index}
+      image={item.src.large}
+      photographer={item.photographer}
+    />
+  ));
+const LoadMore = () => {
+  dispatch(getMore({next_page :next_page}));
+}
+//  console.log("Result", locations);
 //  console.log("Here", query);
 //   useEffect(()=> {
 // console.log('rerender');
@@ -105,30 +125,29 @@ const Discover = () => {
       <SearchZone 
       value={query}
       handleClick={(e)=> setQuery(e.target.value)}
-      onclick={()=>{dispatch(getLocations({query:query}))}}
+      onclick={()=>{dispatch(getImages({query:query})) }}
       />
-     
-      <div className="mt-5 grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 gap-10 text-grayscale-50 w-full justify-items-center place-content-center">
-       {
- locations?.photos?.length && locations.photos.map((item)=>{
-          return (
-            <AreaCard 
-            key={item.id} 
-            index={item.id} 
-            title={item.alt}
-            image={item.src.landscape}
-            description={item.alt}
-            photographer={item.photographer}
-            // {...service} 
-            />
-          )
-        })
-       }  
-      </div>
-     
-     
-
-      
+     <ResponsiveMasonry
+                columnsCountBreakPoints={{350: 1, 750: 2, 900: 3}}
+            >
+                <Masonry
+                gutter="20px"
+                columnsCount={3}
+                >
+       {items}  
+     </Masonry>
+     </ResponsiveMasonry>
+     {
+      next_page && 
+      <div className="flex justify-center items-center cursor-pointer" 
+      onClick={LoadMore}
+      >
+					<a className="shadow-md shadow-gray-700 p-2 bg-zinc-800 rounded-lg flex justify-center text-sm"
+					>
+					Load more
+					</a>
+				</div>
+     }
     </>
   );
 };
