@@ -65,7 +65,7 @@ const AreaCard = ({
 
 const SearchZone = ({value , handleClick, onclick})=> {
   return(
-<div className="flex flex-row w-full h-30 justify-start gap-10 items-center py-2" >
+<div className="flex flex-row flex-wrap w-full h-30 justify-start gap-10 items-center py-2" >
          <input 
          className="placeholder-shown:border-gray-500 p-2 rounded-lg "
           placeholder="mountain , car"
