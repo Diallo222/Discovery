@@ -47,11 +47,9 @@ export const getImages = createAsyncThunk(
           Authorization : apiKey
           }
         });
-        console.log('Done ok',response.data);
         return response.data;
       } catch (err) {
         const errorMessage = err.response?.data?.message ?? err.message;
-        console.log('Error not ok',errorMessage);
         return rejectWithValue(errorMessage);
       }
     },
