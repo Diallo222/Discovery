@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { textVariant } from "../utils/motion";
-import { RandomImages } from "../constants";
 import ShuffleGrid from "./ShuffleGrid";
 const imageHoverEffect = {
   rest: { scale: 1, rotate: 0 },

@@ -33,7 +33,7 @@ const Discover = () => {
   };
 
   useEffect(() => {
-    dispatch(getImages({ query: "white" }));
+    dispatch(getImages({ query: "Minimalist" }));
   }, []);
 
   return (

@@ -1,5 +1,4 @@
 import { BrowserRouter } from "react-router-dom";
-import { Canvas } from "@react-three/fiber";
 import { Discover, Home, Navbar } from "./components";
 
 const App = () => {
