@@ -14,7 +14,7 @@ const Search = ({ value, handleClick, onclick }) => {
             className="flex justify-center items-center cursor-pointer"
             onClick={onclick}
           >
-            <a className="px-6 py-2 font-medium bg-slate-50 text-black w-fit transition-all shadow-[3px_3px_0px_black] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] hover:bg-cyan-400">
+            <a className="px-6 py-2 font-medium bg-slate-50 text-black hover:text-white w-fit transition-all shadow-[3px_3px_0px_black] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] hover:bg-zinc-900">
               search
             </a>
           </div>

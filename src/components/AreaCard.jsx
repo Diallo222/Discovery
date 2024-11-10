@@ -1,23 +1,26 @@
+import React from 'react'
+import { motion } from "framer-motion";
 const AreaCard = ({
-    index,
     name,
-    description,
     image,
     photographer,
-    demo_link,
   }) => {
     return (
-      <div className=" w-full rounded-lg ">
-        <img
+      <motion.div 
+      initial={{ scale: 1 }}
+      whileHover={{ scale: 0.98 }}
+      className="w-full  overflow-hidden transition-transform duration-700 ease-in-out">
+        <motion.img
           src={image}
           alt={name}
-          style={{ width: "100%", borderRadius: "8px" }}
-          className="transition-transform duration-300 hover:scale-110"
+          initial={{ scale: 1 }}
+          whileHover={{ scale: 1.1}}
+          className="transition-transform duration-700 ease-in-out "
         />
-        <p className="left-2 text-white text-[14px] leading-snug text-center">
+        <p className=" text-black uppercase text-base md:text-md tracking-tighter font-medium text-center mt-2">
           From {photographer}
         </p>
-      </div>
+      </motion.div>
     );
   };
 

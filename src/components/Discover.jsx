@@ -10,7 +10,7 @@ import { fadeIn, staggerContainer, textVariant } from "../utils/motion";
 import BarLoader from "./Indicator";
 
 const Discover = () => {
-  const { images, next_page, loading, error } = useSelector(
+  const { images, next_page, loading } = useSelector(
     (state) => state.location,
     shallowEqual
   );
@@ -32,9 +32,9 @@ const Discover = () => {
     dispatch(getMore({ next_page: next_page }));
   };
 
-  useEffect(()=>{
-    dispatch(getImages({ query: 'mountain' }));
-  },[])
+  useEffect(() => {
+    dispatch(getImages({ query: "white" }));
+  }, []);
 
   return (
     <motion.section
@@ -42,18 +42,17 @@ const Discover = () => {
       variants={staggerContainer()}
       initial="hidden"
       whileInView="show"
-      // viewport={{ once: true, amount: 0.25 }}
-      className={`${styles.padding} max-w-7xl mx-auto relative z-0`}
+      className={`${styles.padding} max-w-full mx-auto relative z-0`}
     >
       <motion.div variants={textVariant()}>
-        <p className={styles.sectionSubText}>Explore</p>
+        <p className="text-[18px] text-black font-semibold uppercase tracking-wider">Explore</p>
       </motion.div>
 
       <motion.p
         variants={fadeIn("", "", 0.1, 1)}
-        className="mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]"
+        className="mt-1 text-zinc-800 text-[17px] max-w-3xl leading-[30px]"
       >
-        Search for something , ex: car , mountain , land etc ...
+        Search for something, ex: car, mountain, land, etc...
       </motion.p>
       <Search
         value={query}
@@ -62,11 +61,14 @@ const Discover = () => {
           dispatch(getImages({ query: query }));
         }}
       />
+
+      {/* Masonry Grid with Responsive Layout */}
       <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
-        <Masonry gutter="20px" columnsCount={3}>
+        <Masonry gutter="20px">
           {items}
         </Masonry>
       </ResponsiveMasonry>
+
       {next_page && !loading && (
         <div
           className="flex justify-center items-center cursor-pointer"
@@ -78,14 +80,11 @@ const Discover = () => {
         </div>
       )}
 
-      {
-        loading &&
+      {loading && (
         <motion.div className="flex justify-center items-center my-4">
           <BarLoader />
         </motion.div>
-        
-      }
-
+      )}
     </motion.section>
   );
 };

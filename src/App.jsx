@@ -1,23 +1,13 @@
 import { BrowserRouter } from "react-router-dom";
-
-import {
-  Discover,
-  Home,
-  Navbar,
-
-} from "./components";
-
+import { Canvas } from "@react-three/fiber";
+import { Discover, Home, Navbar } from "./components";
 
 const App = () => {
   return (
     <BrowserRouter>
-      <div className="relative z-0 bg-zinc-950">
-        <div 
-        // className="bg-hero-pattern bg-cover bg-no-repeat bg-center"
-        >
-          <Navbar />
-          <Home />
-        </div>
+      <div className=" bg-gray-200 ">
+        <Navbar />
+        <Home />
         <Discover />
       </div>
     </BrowserRouter>

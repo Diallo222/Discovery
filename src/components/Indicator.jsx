@@ -26,11 +26,11 @@ const BarLoader = () => {
       animate="animate"
       className="flex gap-1"
     >
-      <motion.div variants={variants} className="h-8 w-2 bg-white" />
-      <motion.div variants={variants} className="h-8 w-2 bg-white" />
-      <motion.div variants={variants} className="h-8 w-2 bg-white" />
-      <motion.div variants={variants} className="h-8 w-2 bg-white" />
-      <motion.div variants={variants} className="h-8 w-2 bg-white" />
+      <motion.div variants={variants} className="h-8 w-2 bg-black" />
+      <motion.div variants={variants} className="h-8 w-2 bg-black" />
+      <motion.div variants={variants} className="h-8 w-2 bg-black" />
+      <motion.div variants={variants} className="h-8 w-2 bg-black" />
+      <motion.div variants={variants} className="h-8 w-2 bg-black" />
     </motion.div>
   );
 };
