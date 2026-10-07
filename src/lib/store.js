@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { fetchPhotos } from "./pexels";
+import { syncDocumentMeta } from "./seo";
 import { writeUrl } from "./url";
 
 let controller = null;
@@ -51,6 +52,7 @@ export const useStore = create((set, get) => ({
         return;
       }
       writeUrl(query, color);
+      syncDocumentMeta(query, color);
       set((s) => ({
         query,
         color,
