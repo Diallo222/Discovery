@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Analytics } from "@vercel/analytics/react";
 import { useStore } from "./lib/store";
 import { field } from "./lib/field";
 import { switchMode } from "./lib/mode";
@@ -55,6 +56,7 @@ export default function App() {
       <Preloader />
       <Cursor />
       <div className="grain" aria-hidden="true" />
+      <Analytics />
     </>
   );
 }
