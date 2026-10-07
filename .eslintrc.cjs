@@ -9,9 +9,13 @@ module.exports = {
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
-  settings: { react: { version: '18.2' } },
+  settings: { react: { version: '19.2' } },
   plugins: ['react-refresh'],
   rules: {
+    // React 19 dropped propTypes.
+    'react/prop-types': 'off',
+    // React Three Fiber props.
+    'react/no-unknown-property': ['error', { ignore: ['geometry', 'material', 'frustumCulled', 'args', 'attach'] }],
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
